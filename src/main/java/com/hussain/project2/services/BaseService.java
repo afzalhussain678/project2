@@ -2,7 +2,6 @@ package com.hussain.project2.services;
 
 import com.hussain.project2.model.BaseRequest;
 import com.hussain.project2.model.BaseResponse;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 public class BaseService {
     @Value("${my.email}")
     private String email;
-    @HystrixCommand(fallbackMethod = "defaultEmail")
     public BaseResponse execute(BaseRequest baseRequest){
         baseRequest.setEmail(email);
         BaseResponse baseResponse= new BaseResponse();

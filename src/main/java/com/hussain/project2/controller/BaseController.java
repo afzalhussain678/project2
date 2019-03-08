@@ -22,6 +22,7 @@ public class BaseController {
     @PostMapping("/addValueToRequest")
     public BaseResponse addValueToRequest(@RequestBody  BaseRequest baseRequest){
         BaseResponse baseResponse=baseService.execute(baseRequest);
+        baseResponse.setEmail(baseRequest.getEmail());
         return baseResponse;
     }
 
