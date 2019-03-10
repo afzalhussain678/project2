@@ -1,21 +1,28 @@
 package com.hussain.project2.controller;
 
+import com.hussain.project2.model.AdminDetailsRequest;
+import com.hussain.project2.model.AdminDetailsResponse;
 import com.hussain.project2.model.BaseRequest;
 import com.hussain.project2.model.BaseResponse;
+import com.hussain.project2.services.AdminService;
 import com.hussain.project2.services.BaseService;
-import com.hussain.project2.services.NameService;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(value="/customer",description="Customer Profile",produces ="application/json")
 public class BaseController {
-    @Autowired
-    BaseService baseService;
+
+    private final static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     @Autowired
-    NameService nameService;
+    BaseService baseService;
+    @Autowired
+    AdminService adminService;
+
 
     @GetMapping("/home")
     public BaseResponse home() {
@@ -32,21 +39,12 @@ public class BaseController {
         return baseResponse;
     }
 
-    //To do: Please debug the following endpoint
-    @GetMapping("/name/{age}")
-    public String returnName(@RequestParam String country,
-                             @PathVariable int age) {
-        String name = "";
-        name = nameService.getName();
-        return name + " belongs to country: " + country + " and his age is " + age;
+    @PostMapping("/adminDetails")
+    public AdminDetailsResponse admindetails(@RequestBody AdminDetailsRequest adminDetailsRequest){
+        adminService.setRequest(adminDetailsRequest);
+        logger.info("Request Received: {}", adminDetailsRequest);
+        return adminService.execute();
     }
 
-    @GetMapping("/number")
-    public int returNumber() {
-       return nameService.number();
 
-
-
-
-    }
 }
