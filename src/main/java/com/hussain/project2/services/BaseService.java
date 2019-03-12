@@ -21,6 +21,6 @@ public class BaseService {
         baseResponse.setMessage("Hstrix fall back invoked added value from property file");
         baseResponse.setEmail("MyEmail");
         return baseResponse;
-
     }
+
 }
