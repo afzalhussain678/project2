@@ -6,10 +6,12 @@ import com.hussain.project2.model.BaseRequest;
 import com.hussain.project2.model.BaseResponse;
 import com.hussain.project2.services.AdminService;
 import com.hussain.project2.services.BaseService;
+import com.hussain.project2.services.Project1Service;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +24,8 @@ public class BaseController {
     BaseService baseService;
     @Autowired
     AdminService adminService;
+    @Autowired
+    Project1Service project1Service;
 
 
     @GetMapping("/home")
@@ -44,6 +48,10 @@ public class BaseController {
         adminService.setRequest(adminDetailsRequest);
         logger.info("Request Received: {}", adminDetailsRequest);
         return adminService.execute();
+    }
+    @GetMapping("/getDataFromAnotherService")
+    public BaseResponse getData(){
+        return project1Service.getData();
     }
 
 
