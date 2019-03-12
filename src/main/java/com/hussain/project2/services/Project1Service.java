@@ -14,6 +14,4 @@ public class Project1Service {
     public BaseResponse getData(){
         return this.restTemplate.getForObject("http://localhost:8444/returnData ", BaseResponse.class);
     }
-    
-
 }
